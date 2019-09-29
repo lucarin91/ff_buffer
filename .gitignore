@@ -1,0 +1,12 @@
+# Rust
+/target
+**/*.rs.bk
+Cargo.lock
+
+# C++
+build/
+*.o
+*.a
+
+# Other
+/.vscode/
