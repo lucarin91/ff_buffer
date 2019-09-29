@@ -16,4 +16,7 @@ criterion = "0.3"
 [[bench]]
 name = "producer_consumer"
 harness = false
-sample-size=10
+
+[[bench]]
+name = "push_pop"
+harness = false

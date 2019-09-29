@@ -16,12 +16,12 @@ fn producer_consumer(n: u64) {
         s.push(Box::new(None));
     });
     let t2 = thread::spawn(move || {
-        let mut count: i128 = 0;
+        let mut count: i64 = 0;
         for el in r.iter() {
             if let None = *el {
                 break;
             }
-            count += (*el).unwrap() as i128;
+            count += (*el).unwrap();
             // println!("{}", (*el).unwrap());
         }
         black_box(count);
