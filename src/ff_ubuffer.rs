@@ -36,10 +36,7 @@ impl<T> FFUnbaundedBuffer<T> {
     pub fn push(&self, el: Box<T>) -> Option<&str> {
         let el_ptr = Box::into_raw(el);
         let res = unsafe {
-            /* Instable for now
-             * let el_void = el_ptr.cast::<*mut i32>();
-             */
-            let el_void = std::mem::transmute::<*mut T, *mut c_void>(el_ptr);
+            let el_void = el_ptr as *mut c_void;
             ffubuffer_push(self.c_ref, el_void)
         };
         if res {
@@ -54,10 +51,7 @@ impl<T> FFUnbaundedBuffer<T> {
             if el_void.is_null() {
                 return None;
             }
-            /* Instable for now
-            / let el_ptr = el_void.cast::<*mut T>();
-            */
-            let el_ptr = std::mem::transmute::<*mut c_void, *mut T>(el_void);
+            let el_ptr = el_void as *mut T;
             Some(Box::from_raw(el_ptr))
         }
     }
