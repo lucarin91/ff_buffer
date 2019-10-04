@@ -29,7 +29,6 @@ int cpp_producer_consumer(uint64_t n) {
     }
   });
 
-  
   int64_t count(0);
   auto t2 = thread([&]() {
     // cout << "inside t2" << endl;

@@ -1,7 +1,7 @@
 #[macro_use]
 extern crate criterion;
-use criterion::Criterion;
 use criterion::black_box;
+use criterion::Criterion;
 
 use ::ff_buffer;
 
@@ -13,7 +13,6 @@ fn push_pop(n: u64) {
         s.push(el);
     }
     s.push(Box::new(None));
-    
     let mut count = 0;
     for el in r.iter() {
         if let None = *el {
@@ -25,7 +24,9 @@ fn push_pop(n: u64) {
 }
 
 fn bench_pc(c: &mut Criterion) {
-    c.bench_function("pp 1_000_000", |b| b.iter(|| push_pop(black_box(1_000_000))));
+    c.bench_function("pp 1_000_000", |b| {
+        b.iter(|| push_pop(black_box(1_000_000)))
+    });
 }
 
 criterion_group! {

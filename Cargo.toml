@@ -3,7 +3,7 @@ name = "ff_buffer"
 version = "0.1.0"
 authors = ["Luca Rinaldi <to@lucar.in>"]
 edition = "2018"
-build="build.rs"
+build = "build.rs"
 
 [dependencies]
 

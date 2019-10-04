@@ -7,10 +7,7 @@ const BUFFER_SECTION_SIZE: u64 = 2048;
 
 pub fn build<T>() -> (FFSender<T>, FFReceiver<T>) {
     let a = Arc::new(FFUnbaundedBuffer::<T>::new(BUFFER_SECTION_SIZE));
-    (
-        FFSender { queue: a.clone() },
-        FFReceiver { queue: a },
-    )
+    (FFSender { queue: a.clone() }, FFReceiver { queue: a })
 }
 
 pub struct FFSender<T> {

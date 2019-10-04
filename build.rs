@@ -1,8 +1,6 @@
 extern crate cc;
 
-fn main()
-{
-
+fn main() {
     cc::Build::new()
         .file("libffbuffer/ff_ubuffer.cpp")
         .file("libffbuffer/benches/producer_consumer.cpp")

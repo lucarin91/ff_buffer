@@ -10,7 +10,7 @@ fn main() {
     let el = Box::new("world");
     println!("send: '{}'", *el);
     s.push(el);
-    
+
     let el = r.pop();
     println!("receive: '{}'", *el);
 
