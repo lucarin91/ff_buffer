@@ -31,7 +31,7 @@ fn producer_consumer(n: u64) {
 }
 
 fn bench_pc(c: &mut Criterion) {
-    c.bench_function("pc 1_000_000", |b| b.iter(|| producer_consumer(black_box(1_000_000))));
+    c.bench_function("pc-rust 1_000_000", |b| b.iter(|| producer_consumer(black_box(1_000_000))));
 }
 
 criterion_group! {
