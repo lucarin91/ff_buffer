@@ -1,6 +1,6 @@
 # FF Buffer
 
-An ongoing porting of the c++ FastFlow lock-free queue to Rust.
+An ongoing porting of the C++ FastFlow lock-free queue to Rust.
 
 The library is a simple interface that mimic the mpsc queue of standard Rust and internally use the C++ version of the FastFlow unbandeau lock-free buffer.
 
