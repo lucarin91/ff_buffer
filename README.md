@@ -5,7 +5,7 @@ An ongoing porting of the C++ FastFlow lock-free queue to Rust.
 The library is a simple interface that mimics the mpsc queue of standard Rust and internally uses the C++ implementation of the FastFlow unbounded lock-free buffer.
 
 ## Build
-The library building is not straightforward, because it relies on the quite new cross language linking time optimization of LLVM ([more](http://blog.llvm.org/2019/09/closing-gap-cross-language-lto-between.html)).
+The library relies on the quite new cross language linking time optimization of LLVM ([more](http://blog.llvm.org/2019/09/closing-gap-cross-language-lto-between.html)), thus the building is not straightforward, for now.
 
 The building process require that the LLVM version of `clang` and `lld` match the one of `rustc`. I currently use `clang` version 8.0.0 with `rustc` version 1.37.0 that both have the LLVM 8. For the complete compatibility list see the table [here](https://doc.rust-lang.org/rustc/linker-plugin-lto.html#toolchain-compatibility).
 
