@@ -18,11 +18,5 @@ criterion = "0.3"
 name = "producer_consumer"
 harness = false
 [[bench]]
-name = "producer_consumer-cpp"
-harness = false
-[[bench]]
 name = "push_pop"
-harness = false
-[[bench]]
-name = "push_pop-cpp"
 harness = false

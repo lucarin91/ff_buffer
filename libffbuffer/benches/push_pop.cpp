@@ -1,11 +1,11 @@
 #include <iostream>
-
+#include <chrono>
 #include "../ff_ubuffer.hpp"
 
 using namespace std;
 
 extern "C" {
-int cpp_push_pop(uint64_t n) {
+uint64_t bench_push_pop_cpp(uint64_t n) {
   void *q = ffubuffer_build(2048);
   if (q == NULL) {
     cerr << "fail to create buffer" << endl;
@@ -24,7 +24,7 @@ int cpp_push_pop(uint64_t n) {
     exit(1);
   }
 
-  int64_t count(0);
+  uint64_t count(0);
   while (1) {
     int64_t *el = (int64_t *)ffubuffer_pop(q);
     if (el == NULL) {
@@ -41,3 +41,14 @@ int cpp_push_pop(uint64_t n) {
   return count;
 }
 }
+
+#ifdef WITH_MAIN
+int main() {
+  auto start = chrono::high_resolution_clock::now();
+  auto res = bench_push_pop_cpp(1000000);
+  auto end = chrono::high_resolution_clock::now();
+  auto diff = chrono::duration_cast<chrono::milliseconds>(end - start);
+  cerr << diff.count() << "ms" << endl;
+  cout <<  res << endl;
+}
+#endif
