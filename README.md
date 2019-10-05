@@ -2,7 +2,7 @@
 
 An ongoing porting of the C++ FastFlow lock-free queue to Rust.
 
-The library is a simple interface that mimic the mpsc queue of standard Rust and internally use the C++ version of the FastFlow unbandeau lock-free buffer.
+The library is a simple interface that mimic the mpsc queue of standard Rust and internally use the C++ version of the FastFlow unbounded lock-free buffer.
 
 ## Build
 The library building is not straightforward, because it relies on the quite new cross language linking time optimization of LLVM ([more](http://blog.llvm.org/2019/09/closing-gap-cross-language-lto-between.html)).
