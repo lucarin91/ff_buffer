@@ -41,5 +41,5 @@ cargo run --example simple
 cargo bench
 ```
 
-# Licence
-MIT licence
+# License
+MIT license
