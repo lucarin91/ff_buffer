@@ -1,5 +1,6 @@
 extern crate cc;
 
+use std::path::PathBuf;
 use std::{env, fs};
 
 fn get_ff_path() -> Option<String> {
@@ -18,31 +19,43 @@ fn get_ff_path() -> Option<String> {
 }
 
 fn main() {
+    // search for FastFlow
     let ff_path = get_ff_path();
     if ff_path.is_none() {
         panic!("FastFlow not found!");
     }
     let ff_path = ff_path.unwrap();
+    println!("FF_PATH={}", ff_path);
 
-    println!("{}", ff_path);
+    // get c++ benches path
+    let benches: Vec<PathBuf> = fs::read_dir("libffbuffer/benches")
+        .expect("read_dir call failed")
+        .map(|a| a.expect("read_file failed").path())
+        .collect();
 
-    cc::Build::new()
+    // general configuration
+    let mut build = cc::Build::new();
+    build
         .file("libffbuffer/ff_ubuffer.cpp")
-        .files(
-            fs::read_dir("libffbuffer/benches")
-                .expect("read_dir call failed")
-                .map(|a| a.expect("read_file failed").path()),
-        )
+        .files(benches.clone())
+        .compiler("clang")
         .cpp(true)
-        .compiler("clang++")
         .opt_level(3)
         .warnings(false)
-        .flag("-flto=thin")
-        .include(ff_path)
-        .compile("ffbuffer");
+        .include(ff_path);
 
-    // set rerun build if c++ lib change
+    // optinal cross language feature
+    if cfg!(feature = "crosslto") {
+        build.flag("-flto=thin");
+    }
+
+    // comnpile c++ library
+    build.compile("ffbuffer");
+
+    // set rerun if c++ lib change
     println!("cargo:rerun-if-changed=./libffbuffer/ff_ubuffer.cpp");
     println!("cargo:rerun-if-changed=./libffbuffer/ff_ubuffer.hpp");
-    println!("cargo:rerun-if-changed=./libffbuffer/benches/producer_consumer.cpp");
+    for p in benches {
+        println!("cargo:rerun-if-changed={}", p.display());
+    }
 }

@@ -33,7 +33,7 @@ impl<T> FFReceiver<T> {
         }
     }
     pub fn try_pop(&self) -> Option<Box<T>> {
-        return self.queue.pop();
+        self.queue.pop()
     }
     pub fn iter(&self) -> FFReceiverIter<'_, T> {
         FFReceiverIter { rx: self }
