@@ -38,7 +38,6 @@ fn main() {
     build
         .file("libffbuffer/ff_ubuffer.cpp")
         .files(benches.clone())
-        .compiler("clang")
         .cpp(true)
         .opt_level(3)
         .warnings(false)
@@ -46,7 +45,8 @@ fn main() {
 
     // optinal cross language feature
     if cfg!(feature = "crosslto") {
-        build.flag("-flto=thin");
+        build.flag("-flto=thin")
+             .compiler("clang");
     }
 
     // comnpile c++ library
