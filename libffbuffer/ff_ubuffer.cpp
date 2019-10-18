@@ -6,7 +6,7 @@ void *ffubuffer_build(uint64_t size) {
   return buffer->init() ? buffer : NULL;
 }
 
-void ffubuffer_destroy(void *buffer) { free(buffer); }
+void ffubuffer_destroy(void *buffer) { delete (ffubuffer *)buffer; }
 
 bool ffubuffer_push(void *buffer, void *element) {
   return ((ffubuffer *)buffer)->push(element);
